@@ -1,127 +1,35 @@
 <html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-</head>
-<body>
-    <div id="map" style="width: 700px; height: 500px"></div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Bioscene MADA Test Map</title>
 
+    <!-- jquery -->
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    
+    <!-- leaflet for the map -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+    <!-- gmap and leaflet apis to enable satellite tiles -->
+    <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+
+    <script src="leaflet.google.js"></script>
+
+    <!-- font awesome for icons -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <style>
-    .leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; color: #444; display: block; height: 26px; width: 26px; line-heigh
-t: 1.45 !important; text-align: center; text-decoration: none; font: bold 18px 'Lucida Console', Monaco, monospace;
-    }
-    </style>
+    <!-- local styles -->
+    <link href="index.css" rel="stylesheet">
 
-    <script>
-        var lat = 41;
-        var lng = 12.65;
-        var zoom = 5;
+    <!-- local javascript -->
+    <script src="index.js"></script>
+</head>
+<body>
+    <!-- the map div -->
+    <div id="map"></div>
 
-        // set up the map and remove the default zoomControl
-        var map = L.map('map', {
-            zoomControl: false
-        });
-
-        // add the zoomControl to the map
-        map.setView([lat, lng], zoom);
-        // http://104.236.78.89:8080/geoserver/nurc/wms
-
-        var test = L.tileLayer.wms("http://104.236.78.89:8080/geoserver/nurc/wms",{
-            layers: 'mosaic',
-            format: 'image/png',
-            transparent: true,    
-            opacity: 0.7       
-        }).addTo(map);
-
-        // L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //     maxZoom: 18
-        // }).addTo(map);
-
-        // custom zoom bar control that includes a Zoom Home function
-        L.Control.zoomHome = L.Control.extend({
-            options: {
-                position: 'topright',
-                zoomInText: '+',
-                zoomInTitle: 'Zoom in',
-                zoomOutText: '-',
-                zoomOutTitle: 'Zoom out',
-                zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
-                zoomHomeTitle: 'Zoom home'
-            },
-
-            onAdd: function (map) {
-                var controlName = 'gin-control-zoom',
-                    container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
-                    options = this.options;
-
-                this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
-                controlName + '-in', container, this._zoomIn);
-                this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
-                controlName + '-home', container, this._zoomHome);
-                this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
-                controlName + '-out', container, this._zoomOut);
-
-                this._updateDisabled();
-                map.on('zoomend zoomlevelschange', this._updateDisabled, this);
-
-                return container;
-            },
-
-            onRemove: function (map) {
-                map.off('zoomend zoomlevelschange', this._updateDisabled, this);
-            },
-
-            _zoomIn: function (e) {
-                this._map.zoomIn(e.shiftKey ? 3 : 1);
-            },
-
-            _zoomOut: function (e) {
-                this._map.zoomOut(e.shiftKey ? 3 : 1);
-            },
-
-            _zoomHome: function (e) {
-                // debugger;
-                map.setView([lat, lng], zoom);
-            },
-
-            _createButton: function (html, title, className, container, fn) {
-                var link = L.DomUtil.create('a', className, container);
-                link.innerHTML = html;
-                link.href = '#';
-                link.title = title;
-
-                L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
-                    .on(link, 'click', L.DomEvent.stop)
-                    .on(link, 'click', fn, this)
-                    .on(link, 'click', this._refocusOnMap, this);
-
-                return link;
-            },
-
-            _updateDisabled: function () {
-                var map = this._map,
-                    className = 'leaflet-disabled';
-
-                L.DomUtil.removeClass(this._zoomInButton, className);
-                L.DomUtil.removeClass(this._zoomOutButton, className);
-
-                if (map._zoom === map.getMinZoom()) {
-                    L.DomUtil.addClass(this._zoomOutButton, className);
-                }
-                if (map._zoom === map.getMaxZoom()) {
-                    L.DomUtil.addClass(this._zoomInButton, className);
-                }
-            }
-        });
-
-        new L.Control.zoomHome().addTo(map);
-
-    // });
-
-
-    </script>
 </body>
 </html>
