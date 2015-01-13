@@ -41,13 +41,12 @@ function initMap() {
 	    zoomControl: false,
 		layers: [streets, forest2000]	
 	});
+    // add the custom zoom home control, defined below
+    new L.Control.zoomHome().addTo(MAP);
 
-	// add the custom zoom home control, defined below
-	new L.Control.zoomHome().addTo(MAP);
-
-	// set the initial view, and resize the map
-	zoomHome();
-	resizeMap();
+    // set the initial view, and resize the map
+    zoomHome();
+    resizeMap();
 
 	// set up layer control
 	var baseMaps = {
