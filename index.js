@@ -29,8 +29,9 @@ function initMap() {
 	var satellite = new L.Google();
 
 	// init forest cover layer
-	var forest2000 = L.tileLayer.wms("http://188.226.234.177:8080/geoserver/tiger/wms",{
-	    layers: 'foret2000-fix_wgs84',
+    var url = 'http://104.236.18.180:8080/geoserver/data/wms';
+	var forest2000 = L.tileLayer.wms(url,{
+	    layers: 'fick',
 	    format: 'image/png',
 	    transparent: true,    
 	    opacity: 0.7       
