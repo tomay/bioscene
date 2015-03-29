@@ -56,7 +56,7 @@ function initMap() {
 	    "Satellite": satellite
 	};
 	var overlayMaps = {
-	    "Forest 2000": forest2000
+	    // "Forest 2000": forest2000
 	};
 	L.control.layers(baseMaps, overlayMaps).addTo(MAP);
 }
