@@ -12,9 +12,9 @@ input[type="checkbox"] { width: 13px; height: 13px; padding: 0; margin-right:2px
 /***
  * LAYER PICKER AND RELATED
  ***/
-div#layerpicker, div.layer-opener { font-family: 'Open Sans', sans-serif; font-size: 14px; border-radius:4px; background-color:#FAFAFA; position:absolute; padding:1em; box-shadow: 0px 1px 5px rgba(0,0,0,0.65); }
-div#layerpicker {min-width: 160px; z-index:100; bottom:10px; right:10px;}
-div#layer-opener {z-index:99; bottom:12px; right:12px; cursor:pointer; width: 36px; height: 36px; background-image: url(images/layers.png); background-position: 50% 50%; background-repeat: no-repeat; display: block; }
+div#layerpicker, div#layer-opener { font-family: 'Open Sans', sans-serif; font-size: 14px; border-radius:4px; background-color:#FAFAFA; position:absolute; padding:1em; box-shadow: 0px 1px 5px rgba(0,0,0,0.65); }
+div#layerpicker {min-width: 160px; z-index:100; top:10px; right:10px;}
+div#layer-opener {z-index:99; top:12px; right:12px; cursor:pointer; width: 36px; height: 36px; background-image: url(images/layers.png); background-position: 50% 50%; background-repeat: no-repeat; display: block; }
 div#layerpicker > div { text-align:left; margin-bottom:4px; }
 div#layerpicker div.opacity_slider { margin:7px 1em 5px 0; }
 div#layerpicker div.legend { margin-left:1em; }
