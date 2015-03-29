@@ -17,7 +17,7 @@ $(window).resize(function(){
 $(document).ready(function(){
 	initMap();
     initLayerpicker();
-
+    initState();
 })
 
 /*******************************
@@ -50,13 +50,7 @@ function initMap() {
 	// add the custom zoom home control, defined below
 	new L.Control.zoomHome().addTo(MAP);
 
-	// set the initial view, and resize the map
-	zoomHome();
-    // trigger overlays
-    $('#map input[name="overlays"]').removeAttr('checked','checked').trigger('change');
-    $('#map div[data-overlay="forest2010"] input[name="overlays"]').prop('checked','checked').trigger('change');
-	
-    resizeMap();
+
 
 	// set up layer control
 	// var baseMaps = {
@@ -67,6 +61,17 @@ function initMap() {
 	//     // "Forest 2000": forest2000
 	// };
 	// L.control.layers(baseMaps, overlayMaps).addTo(MAP);
+}
+
+function initState() {
+    // all set, go
+    // set the initial view, and resize the map
+    zoomHome();
+    // trigger overlays
+    $('#map input[name="overlays"]').removeAttr('checked','checked').trigger('change');
+    $('#map div[data-overlay="forest2010"] input[name="overlays"]').prop('checked','checked').trigger('change');
+    
+    resizeMap();
 }
 
 function initLayerpicker() {
