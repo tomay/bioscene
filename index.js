@@ -41,10 +41,11 @@ function initMap() {
     // init wms layers
     var url = 'http://128.199.43.143:8080/geoserver/pyramids/wms';
     var format = 'image/png';
+    var version = '1.1.0';
     MAP.overlays = {};
-    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'forest1990m', format: format, transparency: true, opacity:1});
-    MAP.overlays['forest2000']     = L.tileLayer.wms(url, { layers: 'forest2000m', format: format, transparency: true, opacity:1});
-    MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: 'pyramids:forest2010m', format: format, transparency: true, opacity:1});
+    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'pyramids:for1990m', version:version, format: format, transparency: true, opacity:1});
+    MAP.overlays['forest2000']     = L.tileLayer.wms(url, { layers: 'pyramids:for2000m', version:version, format: format, transparency: true, opacity:1});
+    MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: 'pyramids:for2010m', version:version, format: format, transparency: true, opacity:1});
     MAP.overlays['carbon']         = L.tileLayer.wms(url, { layers: 'carbon', format: format, transparency: true, opacity:1});
 
 	// add the custom zoom home control, defined below
