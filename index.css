@@ -1,5 +1,6 @@
 /*global layout styles*/
 html, body {margin:0;padding:0;}
+label { cursor:pointer; margin-bottom:0; }
 
 /*basic map styles*/
 #map {width:100%;height:600px;}
@@ -7,23 +8,29 @@ html, body {margin:0;padding:0;}
 /*leaflet custom styles and overrides*/
 .leaflet-bar a { background-color: #fff; border-bottom: 1px solid #ccc; color: #444; display: block; height: 26px; width: 26px; line-height: 26px !important; text-align: center; text-decoration: none; font: bold 18px 'Lucida Console', Monaco, monospace; }
 
-/*layerpicker and related*/
-
+/***
+ * LAYER PICKER AND RELATED
+ ***/
 div.layerpicker, div.layer-opener { font-family: 'Open Sans', sans-serif; font-size: 14px; border-radius:4px; background-color:#FAFAFA; position:absolute; padding:1em; box-shadow: 0px 1px 5px rgba(0,0,0,0.65); }
 div.layerpicker {z-index:100; bottom:10px; right:10px;}
 div.layer-opener {z-index:99; bottom:12px; right:12px; cursor:pointer; width: 32px; height: 32px; background-image: url(images/layers.png); background-repeat: no-repeat; background-size: 26px; background-position: 3px 3px; }
-/*a.layers-toggle { background-image: url(images/layers.png); width: 50px; height: 50px; }*/
-
 div.layerpicker > div { text-align:left; margin-bottom:4px; }
-
 div.layerpicker div.opacity_slider { margin:7px 1em 5px 0; }
-
 div.layerpicker div.legend { margin-left:1em; }
 div.layerpicker div.legend_swatch { display:inline-block; height:15px; width:15px; vertical-align:text-bottom; }
-
 div.layerpicker span.glyphicon { color: #7c7c7c; cursor: pointer; }
 div.layerpicker span.glyphicon:hover { color: #333; }
-
 div.layerpicker button.close {margin-top:-7px; margin-left:-4px;}
 /*position set in js, see initMaps();*/
 .layer-info { display:none; position:absolute; z-index:1150; color:#fff; background:#222; font-family:Arial; font-size:13px; padding:4px 6px; border-radius:3px; }
+
+/***
+ * JQUERY OVERRIDES - SLIDER
+ ***/
+
+.ui-slider .ui-slider-handle { margin-top: -2px; border-radius: 50%; position: absolute; z-index: 2; width: 18px; height: 18px; cursor: default;box-shadow: 1px 1px 9px 1px rgba(0,0,0,.3) }
+.ui-slider-horizontal { height: 6px; }
+.opacity_slider .ui-slider-range { background: #6985A5; }
+/*fixes slider-handle border on focus and hover color*/
+.ui-slider .ui-slider-handle:focus { outline: none; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border: 1px solid #b8afa4; }
