@@ -42,7 +42,7 @@ function initMap() {
     var url = 'http://128.199.43.143:8080/geoserver/data/wms';
     var format = 'image/png';
     MAP.overlays = {};
-    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'forest2010m', format: format, transparency: true, opacity:1});
+    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'pyramids:forest2010m', format: format, transparency: true, opacity:1});
     MAP.overlays['forest2000']     = L.tileLayer.wms(url, { layers: '', format: format, transparency: true, opacity:1});
     MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: '', format: format, transparency: true, opacity:1});
     MAP.overlays['carbon']         = L.tileLayer.wms(url, { layers: '', format: format, transparency: true, opacity:1});
