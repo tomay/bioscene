@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Bioscene MADA Test Map</title>
 
-    <!-- jquery -->
+    <!-- jquery and jqui -->
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.1/themes/humanity/jquery-ui.css" />
     
     <!-- leaflet for the map -->
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
@@ -28,6 +30,59 @@
 </head>
 <body>
     <!-- the map div -->
-    <div id="map"></div>
+    <div id="map">
+        <!-- layer opener, hidden under the layer picker -->
+        <div class="layer-opener" title="click to show layer picker" style="max-height: 383px;"></div>
+        <div class="layerpicker"><!-- LayerPicker classes have a fair amount of magical behavior defined in initMap() e.g. opacity sliders, layer toggles, census variable selection, ... -->
+            <button type="button" class="close" title="click to hide layer picker" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <div data-overlay="labels1" class="legend-block">
+                <label><input type="checkbox" name="overlays"> Street Labels</label><br/>
+                <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="80"></div>
+            </div>
+            <div data-overlay="parks1" class="legend-block">
+                <label><input type="checkbox" name="overlays"> Parks and Open Space</label>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><br/>
+                <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="80"></div>
+                <div class="legend">
+                    <div class="legend_swatch" style="background-color:rgb(183,232,183);"></div> Park or Preserved Area <br/>
+                </div>
+            </div>
+            <div data-overlay="noparkaccess" class="legend-block">
+                <label><input type="checkbox" name="overlays"> No Park Access </label>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><br/>
+                <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="65"></div>
+                <div class="legend">
+                    <div class="legend_swatch" style="background-color:rgb(245,236,218);"></div> &lt; 200 people per sq mi <br/>
+                    <div class="legend_swatch" style="background-color:rgb(255,169,107);"></div> 200 - 1,000 ppl per sq mi <br/>
+                    <div class="legend_swatch" style="background-color:rgb(153,0,0);"></div> &gt; 1,000 ppl pe sq mi <br/>
+                </div>
+            </div>
+            <div data-overlay="parkaccess" class="legend-block">
+                <label><input type="checkbox" name="overlays"> Areas With Park Access</label><br/>
+                <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="65"></div>
+                <div class="legend">
+                    <div class="legend_swatch" style="background-color:rgb(248,252,184);"></div> Area within 1/2 mile of a park <br/>
+                </div>
+            </div>
+            <div data-overlay="nopopulation" class="legend-block">
+                <label><input type="checkbox" name="overlays"> No Population</label><br/>
+                <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="65"></div>
+                <div class="legend">
+                    <div class="legend_swatch" style="background-color:rgb(244,226,159);"></div> Park service area <br/>
+                </div>
+            </div>
+            <div data-overlay="disadvantaged" class="legend-block">
+                <label><input type="checkbox" name="overlays"> Disadvantaged Community </label>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><br/>
+                <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="65"></div>
+                <div class="legend">
+                    <div class="legend_swatch" style="background-color:rgb(150,110,190)"></div> Disadvantaged Community <br/>
+                </div>
+            </div>
+            
+        </div>        
+
+
+    </div><!-- map -->
 </body>
 </html>
