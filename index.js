@@ -17,6 +17,7 @@ $(window).resize(function(){
 $(document).ready(function(){
 	initMap();
     initLayerpicker();
+
 })
 
 /*******************************
@@ -53,7 +54,7 @@ function initMap() {
 	zoomHome();
     // trigger overlays
     $('#map input[name="overlays"]').removeAttr('checked','checked').trigger('change');
-    $('#map div[data-overlay="forest2000"] input[name="overlays"]').prop('checked','checked').trigger('change');
+    $('#map div[data-overlay="forest2010"] input[name="overlays"]').prop('checked','checked').trigger('change');
 	
     resizeMap();
 
@@ -124,6 +125,15 @@ function initLayerpicker() {
         L.DomEvent.on(this,'touchend',L.DomEvent.stop);
     });
 
+    // close layerpicker on click 'x'
+    $('div#layerpicker button.close').on('click', function(){
+        $(this).parent().hide();
+    })
+
+    // open layerpicker on click layer-opener
+    $('div#layer-opener').on('click', function(){
+        $(this).next('.layerpicker').show();
+    })
 
 
 }

@@ -37,16 +37,27 @@
     <!-- the map div -->
     <div id="map">
         <!-- layer opener, hidden under the layer picker -->
-        <div class="layer-opener" title="click to show layer picker" style="max-height: 383px;"></div>
+        <div id="layer-opener" title="click to show layer picker" style="max-height: 383px;"></div>
         <div id="layerpicker"><!-- LayerPicker classes have a fair amount of magical behavior defined in initMap() e.g. opacity sliders, layer toggles, census variable selection, ... -->
             <button type="button" class="close" title="click to hide layer picker" aria-label="Close"><span aria-hidden="true">×</span></button>
 
+            <!-- basemaps -->
+            <div class="basepicker">
+                <label>
+                    <input type="radio" name="basemaps" data-basemap="streets" checked="checked"><span> Streets</span>
+                </label>
+                <label>
+                    <input type="radio" name="basemaps" data-basemap="satellite"><span> Satellite</span>
+                </label>
+            </div><!-- basemaps -->
+
+            <!-- overlays -->
             <div data-overlay="forest2010" class="legend-block">
                 <label><input type="checkbox" name="overlays"> Forest 2010</label>
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><br/>
                 <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="80"></div>
                 <div class="legend">
-                    <div class="legend_swatch" style="background-color:rgb(183,232,183);"></div> Park or Preserved Area <br/>
+                    <div class="legend_swatch" style="background-color:#007f00;"></div> Forest<br/>
                 </div>
             </div>
             <div data-overlay="forest2000" class="legend-block">
@@ -54,7 +65,7 @@
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><br/>
                 <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="80"></div>
                 <div class="legend">
-                    <div class="legend_swatch" style="background-color:rgb(183,232,183);"></div> Park or Preserved Area <br/>
+                    <div class="legend_swatch" style="background-color:#007f00;"></div> Forest<br/>
                 </div>
             </div>            
             <div data-overlay="forest1990" class="legend-block">
@@ -62,7 +73,7 @@
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><br/>
                 <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="80"></div>
                 <div class="legend">
-                    <div class="legend_swatch" style="background-color:rgb(183,232,183);"></div> Park or Preserved Area <br/>
+                    <div class="legend_swatch" style="background-color:#007f00;"></div> Forest<br/>
                 </div>
             </div>
             
