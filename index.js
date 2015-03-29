@@ -30,12 +30,12 @@ function initMap() {
 
 	// init forest cover layer
     var url = 'http://104.236.18.180:8080/geoserver/data/wms';
-	var forest2000 = L.tileLayer.wms(url,{
-	    layers: 'fick',
-	    format: 'image/png',
-	    transparent: true,    
-	    opacity: 0.7       
-	});
+	// var forest2000 = L.tileLayer.wms(url,{
+	//     layers: 'fick',
+	//     format: 'image/png',
+	//     transparent: true,    
+	//     opacity: 0.7       
+	// });
 
 	// set up the map and remove the default zoomControl
 	MAP = L.map('map', {
