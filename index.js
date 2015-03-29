@@ -39,7 +39,7 @@ function initMap() {
 	});
 
     // init wms layers
-    var url = 'http://128.199.43.143:8080/geoserver/data/wms';
+    var url = 'http://128.199.43.143:8080/geoserver/pyramids/wms';
     var format = 'image/png';
     MAP.overlays = {};
     MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'pyramids:forest1990m', format: format, transparency: true, opacity:1});
