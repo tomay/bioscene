@@ -16,6 +16,7 @@ $(window).resize(function(){
 /******************************/
 $(document).ready(function(){
 	initMap();
+    initLayerpicker();
 })
 
 /*******************************
@@ -28,14 +29,6 @@ function initMap() {
 	});
 	var satellite = new L.Google();
 
-	// init forest cover layer
-    var url = 'http://104.236.18.180:8080/geoserver/data/wms';
-	// var forest2000 = L.tileLayer.wms(url,{
-	//     layers: 'fick',
-	//     format: 'image/png',
-	//     transparent: true,    
-	//     opacity: 0.7       
-	// });
 
 	// set up the map and remove the default zoomControl
 	MAP = L.map('map', {
@@ -44,22 +37,95 @@ function initMap() {
 		layers: [streets]	
 	});
 
+    // init wms layers
+    var url = 'http://128.199.43.143:8080/geoserver/data/wms';
+    var format = 'image/png';
+    MAP.overlays = {};
+    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: '', format: format, transparency: true, opacity:1});
+    MAP.overlays['forest2000']     = L.tileLayer.wms(url, { layers: '', format: format, transparency: true, opacity:1});
+    MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: '', format: format, transparency: true, opacity:1});
+    MAP.overlays['carbon']         = L.tileLayer.wms(url, { layers: '', format: format, transparency: true, opacity:1});
+
 	// add the custom zoom home control, defined below
 	new L.Control.zoomHome().addTo(MAP);
 
 	// set the initial view, and resize the map
 	zoomHome();
-	resizeMap();
+    // trigger overlays
+    $('#map input[name="overlays"]').removeAttr('checked','checked').trigger('change');
+    $('#map div[data-overlay="forest2000"] input[name="overlays"]').prop('checked','checked').trigger('change');
+	
+    resizeMap();
 
 	// set up layer control
-	var baseMaps = {
-	    "Streets": streets,
-	    "Satellite": satellite
-	};
-	var overlayMaps = {
-	    // "Forest 2000": forest2000
-	};
-	L.control.layers(baseMaps, overlayMaps).addTo(MAP);
+	// var baseMaps = {
+	//     "Streets": streets,
+	//     "Satellite": satellite
+	// };
+	// var overlayMaps = {
+	//     // "Forest 2000": forest2000
+	// };
+	// L.control.layers(baseMaps, overlayMaps).addTo(MAP);
+}
+
+function initLayerpicker() {
+    //
+    // non-control map controls (layerpicker)
+    //
+    // first off, a stop-propagation on the layerpicker DIVs
+    // so clicks and drags on themj do not propagate downward and onto the map
+    $('div#layerpicker').each(function () {
+        L.DomEvent.on(this,'mousedown',L.DomEvent.stop);
+        // L.DomEvent.on(this,'touchstart',L.DomEvent.stop);
+    });
+
+    // map layer controls: layer visibility checkboxes
+    // these toggle the map layer but of course the UI elements for the layer such as the opacity sliders, legend swatches, basically every DIV that's a sibling of the checkbox's LABEL element
+    $('div#layerpicker input[name="overlays"]').change(function () {
+        var which   = $(this).closest('div[data-overlay]').attr('data-overlay');
+        var layer   = MAP.overlays[which];
+        var divs    = $(this).closest('label').siblings().not('span.glyphicon');
+        var viz     = $(this).is(':checked');
+
+        if (viz) {
+            MAP.addLayer(layer);
+            divs.show();
+        } else {
+            MAP.removeLayer(layer);
+            divs.hide();
+        }
+    });
+
+    // map layer controls: opacity sliders, possible legends, etc.
+    // again with magical self-configuring behavior: the DIV's data-overlay specifies the layer name, the div.map has the map loaded into it, data-default specifies starting value, ...
+    $('div#layerpicker div.opacity_slider').each(function () {
+        // get the magical default
+        var value = $(this).attr('data-default');
+
+        // set up the slider, preset to this value
+        // tip: this is applied in initState() since the sliders could hypothetically be modified by loaded state
+        // tip: do not use the 'stop' event since it cannot be triggered programatically; use 'change' instead
+        $(this).slider({
+            min:0, max:100, value:value, range:'min',
+            change: function (event,ui) {
+                var which   = $(this).closest('div[data-overlay]').attr('data-overlay');
+                var opacity = 0.01 * ui.value;
+                var layer   = MAP.overlays[which];
+                layer.setOpacity(opacity);
+            }
+        });
+    });
+
+    // and stop propagation on sliders
+    $('div#layerpicker').each(function () {
+        // L.DomEvent.on(this,'mousedown',L.DomEvent.stop);
+        L.DomEvent.on(this,'touchstart',L.DomEvent.stop);
+        L.DomEvent.on(this,'touchmove',L.DomEvent.stop);
+        L.DomEvent.on(this,'touchend',L.DomEvent.stop);
+    });
+
+
+
 }
 
 /*******************************

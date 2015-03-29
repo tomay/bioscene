@@ -12,16 +12,16 @@ input[type="checkbox"] { width: 13px; height: 13px; padding: 0; margin-right:2px
 /***
  * LAYER PICKER AND RELATED
  ***/
-div.layerpicker, div.layer-opener { font-family: 'Open Sans', sans-serif; font-size: 14px; border-radius:4px; background-color:#FAFAFA; position:absolute; padding:1em; box-shadow: 0px 1px 5px rgba(0,0,0,0.65); }
-div.layerpicker {z-index:100; bottom:10px; right:10px;}
+div#layerpicker, div.layer-opener { font-family: 'Open Sans', sans-serif; font-size: 14px; border-radius:4px; background-color:#FAFAFA; position:absolute; padding:1em; box-shadow: 0px 1px 5px rgba(0,0,0,0.65); }
+div#layerpicker {z-index:100; bottom:10px; right:10px;}
 div.layer-opener {z-index:99; bottom:12px; right:12px; cursor:pointer; width: 32px; height: 32px; background-image: url(images/layers.png); background-repeat: no-repeat; background-size: 26px; background-position: 3px 3px; }
-div.layerpicker > div { text-align:left; margin-bottom:4px; }
-div.layerpicker div.opacity_slider { margin:7px 1em 5px 0; }
-div.layerpicker div.legend { margin-left:1em; }
-div.layerpicker div.legend_swatch { display:inline-block; height:15px; width:15px; vertical-align:text-bottom; }
-div.layerpicker span.glyphicon { color: #7c7c7c; cursor: pointer; }
-div.layerpicker span.glyphicon:hover { color: #333; }
-div.layerpicker button.close {margin-top:-7px; margin-left:-4px;}
+div#layerpicker > div { text-align:left; margin-bottom:4px; }
+div#layerpicker div.opacity_slider { margin:7px 1em 5px 0; }
+div#layerpicker div.legend { margin-left:1em; }
+div#layerpicker div.legend_swatch { display:inline-block; height:15px; width:15px; vertical-align:text-bottom; }
+div#layerpicker span.glyphicon { color: #7c7c7c; cursor: pointer; }
+div#layerpicker span.glyphicon:hover { color: #333; }
+div#layerpicker button.close {margin-top:-7px; margin-left:-4px;}
 /*position set in js, see initMaps();*/
 .layer-info { display:none; position:absolute; z-index:1150; color:#fff; background:#222; font-family:Arial; font-size:13px; padding:4px 6px; border-radius:3px; }
 
