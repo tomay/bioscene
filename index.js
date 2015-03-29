@@ -40,7 +40,8 @@ function initMap() {
 	// set up the map and remove the default zoomControl
 	MAP = L.map('map', {
 	    zoomControl: false,
-		layers: [streets, forest2000]	
+        // layers: [streets, forest2000]   
+		layers: [streets]	
 	});
 
 	// add the custom zoom home control, defined below
