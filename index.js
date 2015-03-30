@@ -94,15 +94,10 @@ function initLayerpicker() {
     $('div#basepicker input[name="basemaps"]').change(function () {
         var which   = $(this).attr('data-basemap');
         var layer   = MAP.basemaps[which];
-        $.each(MAP.basemaps, function(i, basemap) {
-            console.log(basemap);
-            if (layer == basemap) {
-                console.log('here');
-                MAP.addLayer(basemap)
-            } else {
-                MAP.removeLayer(basemap);
-            }
-        })        
+        var other   = $('div#basepicker input[name="basemaps"][data-basemap!="streets"]').data().basemap;
+        var remove  = MAP.basemaps[other];
+        MAP.removeLayer(remove);
+        MAP.addLayer(layer);    
     });
 
     // map layer controls: opacity sliders, possible legends, etc.
