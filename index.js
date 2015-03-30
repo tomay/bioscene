@@ -98,9 +98,9 @@ function initLayerpicker() {
             console.log(basemap);
             if (layer == basemap) {
                 console.log('here');
-                MAP.addLayer(layer)
+                MAP.addLayer(basemap)
             } else {
-                MAP.removeLayer(layer);
+                MAP.removeLayer(basemap);
             }
         })        
     });
