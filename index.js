@@ -24,13 +24,6 @@ $(document).ready(function(){
 / Init functions
 /******************************/
 function initMap() {
-	// init basemaps
-	var streets = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-	    maxZoom: 18
-	});
-	var satellite = new L.Google();
-
-
 	// set up the map and remove the default zoomControl
 	MAP = L.map('map', {
 	    zoomControl: false,
@@ -46,22 +39,16 @@ function initMap() {
     MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'pyramids:for1990fix', version:version, format: format, transparent: true, opacity:1});
     MAP.overlays['forest2000']     = L.tileLayer.wms(url, { layers: 'pyramids:for2000fix', version:version, format: format, transparent: true, opacity:1});
     MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: 'pyramids:for2010fix', version:version, format: format, transparent: true, opacity:1});
-    MAP.overlays['carbon']         = L.tileLayer.wms(url, { layers: 'carbon', format: format, transparency: true, opacity:1});
+    MAP.overlays['carbon']         = L.tileLayer.wms(url, { layers: 'ACD_for10', format: format, transparent: true, opacity:1});
+
+    // init basemaps
+    MAP.basemaps = {};
+    MAP.basemaps['streets']        = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 });
+    MAP.basemaps['satellite']      = new L.Google();
 
 	// add the custom zoom home control, defined below
 	new L.Control.zoomHome().addTo(MAP);
 
-
-
-	// set up layer control
-	// var baseMaps = {
-	//     "Streets": streets,
-	//     "Satellite": satellite
-	// };
-	// var overlayMaps = {
-	//     // "Forest 2000": forest2000
-	// };
-	// L.control.layers(baseMaps, overlayMaps).addTo(MAP);
 }
 
 function initState() {
@@ -72,6 +59,9 @@ function initState() {
     $('#map input[name="overlays"]').removeAttr('checked','checked').trigger('change');
     $('#map div[data-overlay="forest2010"] input[name="overlays"]').prop('checked','checked').trigger('change');
     
+    // trigger basemaps
+    $('#map input[name="basemaps"]').removeAttr('checked','checked').trigger('change');
+    $('#map div[data-overlay="streets"] input[name="basemaps"]').prop('checked','checked').trigger('change');
     resizeMap();
 }
 
@@ -94,6 +84,20 @@ function initLayerpicker() {
         var divs    = $(this).closest('label').siblings().not('span.glyphicon');
         var viz     = $(this).is(':checked');
 
+        if (viz) {
+            MAP.addLayer(layer);
+            divs.show();
+        } else {
+            MAP.removeLayer(layer);
+            divs.hide();
+        }
+    });
+
+    // basemaps radio buttons
+    $('div#layerpicker input[name="basemaps"]').change(function () {
+        var which   = $(this).closest('div[data-basemap]').attr('data-basemap');
+        var layer   = MAP.overlays[which];
+        var viz     = $(this).is(':checked');
         if (viz) {
             MAP.addLayer(layer);
             divs.show();
@@ -138,9 +142,29 @@ function initLayerpicker() {
 
     // open layerpicker on click layer-opener
     $('div#layer-opener').on('click', function(){
-        $(this).next('.layerpicker').show();
+        $('div#layerpicker').show();
     })
 
+    // info window layers, shown when hovering info icons
+    // var target = $('div.layerpicker span.glyphicon[data-overlay=""')
+    // var info = $('.layer-info');
+    var icons = $('div.layerpicker span.glyphicon');
+    icons.each(function(){
+        var icon  = $(this);
+        var layer = icon.parent().data().overlay;
+        var info  = $('.layer-info[data-overlay="' + layer + '"]')
+        icon.mouseover(function(){
+            var height = info.height();
+            var left = $(this).offset().left - 100;
+            var offset  = height > 20 ? 48 : 30
+            var top = $(this).offset().top - offset;
+            info.css({top: top, left: left})
+            info.show();
+        });
+        icon.mouseout(function(){
+            info.hide();
+        });
+    })
 
 }
 

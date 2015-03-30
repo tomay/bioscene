@@ -76,10 +76,26 @@
                     <div class="legend_swatch" style="background-color:#007f00;"></div> Forest<br/>
                 </div>
             </div>
-            
+            <div data-overlay="carbon" class="legend-block">
+                <label><input type="checkbox" name="overlays"> Forest carbon</label>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><br/>
+                <div class="opacity_slider" title="Drag handle to change layer opacity" data-default="80"></div>
+                <div class="legend">
+                    <div class="legend_swatch" style="background-color:#007f00;"></div> Carbon<br/>
+                </div>
+            </div>
+
         </div>        
 
 
     </div><!-- map -->
+
+    <!-- infowindows shown on hover over i icon on certain layers -->
+    <div data-overlay="forest2010" class="layer-info">Forest cover 2010, source: </div>
+    <div data-overlay="forest2000" class="layer-info">Forest cover 2000, source:  </div>
+    <div data-overlay="forest1990" class="layer-info">Forest cover 1990, source: </div>
+    <div data-overlay="carbon" class="layer-info">Carbon map, source: </div>
+
+
 </body>
 </html>
