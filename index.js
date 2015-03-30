@@ -94,7 +94,7 @@ function initLayerpicker() {
     // basemaps radio buttons
     $('div#layerpicker input[name="basemaps"]').change(function () {
         var which   = $(this).closest('div[data-basemap]').attr('data-basemap');
-        var layer   = MAP.overlays[which];
+        var layer   = MAP.basemaps[which];
         var viz     = $(this).is(':checked');
         if (viz) {
             MAP.addLayer(layer);
