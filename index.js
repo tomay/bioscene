@@ -30,8 +30,9 @@ function initMap() {
 	});
 
     // init basemaps
+    var zIndex = 5;
     MAP.basemaps = {};
-    MAP.basemaps['streets']        = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(MAP);
+    MAP.basemaps['streets']        = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { zIndex: zIndex++, maxZoom: 18 }).addTo(MAP);
     MAP.basemaps['satellite']      = new L.Google();
 
     // init wms layers
@@ -39,10 +40,10 @@ function initMap() {
     var format = 'image/png';
     var version = '1.1.0';
     MAP.overlays = {};
-    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'pyramids:for1990fix', version:version, format: format, transparent: true, opacity:1});
-    MAP.overlays['forest2000']     = L.tileLayer.wms(url, { layers: 'pyramids:for2000fix', version:version, format: format, transparent: true, opacity:1});
-    MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: 'pyramids:for2010fix', version:version, format: format, transparent: true, opacity:1});
-    MAP.overlays['carbon']         = L.tileLayer.wms(url, { layers: 'ACD_for10', format: format, transparent: true, opacity:1});
+    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { zIndex: zIndex++, layers: 'pyramids:for1990fix', version:version, format: format, transparent: true, opacity:1});
+    MAP.overlays['forest2000']     = L.tileLayer.wms(url, { zIndex: zIndex++, layers: 'pyramids:for2000fix', version:version, format: format, transparent: true, opacity:1});
+    MAP.overlays['forest2010']     = L.tileLayer.wms(url, { zIndex: zIndex++, layers: 'pyramids:for2010fix', version:version, format: format, transparent: true, opacity:1});
+    MAP.overlays['carbon']         = L.tileLayer.wms(url, { zIndex: zIndex++, layers: 'ACD_for10', format: format, transparent: true, opacity:1});
 
 
 	// add the custom zoom home control, defined below
@@ -93,12 +94,15 @@ function initLayerpicker() {
     $('div#basepicker input[name="basemaps"]').change(function () {
         var which   = $(this).attr('data-basemap');
         var layer   = MAP.basemaps[which];
-        var viz     = $(this).is(':checked');
-        if (viz) {
-            MAP.addLayer(layer);
-        } else {
-            MAP.removeLayer(layer);
-        }
+        $.each(MAP.basemaps, function(i, basemap) {
+            console.log(basemap);
+            if (layer == basemap) {
+                console.log('here');
+                MAP.addLayer(layer)
+            } else {
+                MAP.removeLayer(layer);
+            }
+        })        
     });
 
     // map layer controls: opacity sliders, possible legends, etc.
