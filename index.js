@@ -29,6 +29,11 @@ function initMap() {
 	    zoomControl: false,
 	});
 
+    // init basemaps
+    MAP.basemaps = {};
+    MAP.basemaps['streets']        = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(MAP);
+    MAP.basemaps['satellite']      = new L.Google();
+
     // init wms layers
     var url = 'http://128.199.43.143:8080/geoserver/pyramids/wms';
     var format = 'image/png';
@@ -39,10 +44,6 @@ function initMap() {
     MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: 'pyramids:for2010fix', version:version, format: format, transparent: true, opacity:1});
     MAP.overlays['carbon']         = L.tileLayer.wms(url, { layers: 'ACD_for10', format: format, transparent: true, opacity:1});
 
-    // init basemaps
-    MAP.basemaps = {};
-    MAP.basemaps['streets']        = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 });
-    MAP.basemaps['satellite']      = new L.Google();
 
 	// add the custom zoom home control, defined below
 	new L.Control.zoomHome().addTo(MAP);
@@ -57,9 +58,6 @@ function initState() {
     $('#map input[name="overlays"]').removeAttr('checked','checked').trigger('change');
     $('#map div[data-overlay="forest2010"] input[name="overlays"]').prop('checked','checked').trigger('change');
     
-    // trigger basemaps
-    $('#map input[name="basemaps"]').removeAttr('checked','checked').trigger('change');
-    $('#map input[data-basemap="streets"]').prop('checked','checked').trigger('change');
     resizeMap();
 }
 
@@ -92,7 +90,7 @@ function initLayerpicker() {
     });
 
     // basemaps radio buttons
-    $('div#layerpicker input[name="basemaps"]').change(function () {
+    $('div#basepicker input[name="basemaps"]').change(function () {
         var which   = $(this).attr('data-basemap');
         var layer   = MAP.basemaps[which];
         var viz     = $(this).is(':checked');
