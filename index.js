@@ -43,9 +43,9 @@ function initMap() {
     var format = 'image/png';
     var version = '1.1.0';
     MAP.overlays = {};
-    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'pyramids:f1990m', version:version, format: format, transparent: true, opacity:1});
-    MAP.overlays['forest2000']     = L.tileLayer.wms(url, { layers: 'pyramids:f2000m', version:version, format: format, transparent: true, opacity:1});
-    MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: 'pyramids:f2010m', version:version, format: format, transparent: true, opacity:1});
+    MAP.overlays['forest1990']     = L.tileLayer.wms(url, { layers: 'pyramids:f1990fix', version:version, format: format, transparent: true, opacity:1});
+    MAP.overlays['forest2000']     = L.tileLayer.wms(url, { layers: 'pyramids:f2000fix', version:version, format: format, transparent: true, opacity:1});
+    MAP.overlays['forest2010']     = L.tileLayer.wms(url, { layers: 'pyramids:f2010fix', version:version, format: format, transparent: true, opacity:1});
     MAP.overlays['carbon']         = L.tileLayer.wms(url, { layers: 'carbon', format: format, transparency: true, opacity:1});
 
 	// add the custom zoom home control, defined below
