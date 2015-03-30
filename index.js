@@ -94,7 +94,7 @@ function initLayerpicker() {
     $('div#basepicker input[name="basemaps"]').change(function () {
         var which   = $(this).attr('data-basemap');
         var layer   = MAP.basemaps[which];
-        var other   = $('div#basepicker input[name="basemaps"][data-basemap!="streets"]').data().basemap;
+        var other   = $('div#basepicker input[name="basemaps"][data-basemap!="' + which + '"]').data().basemap;
         var remove  = MAP.basemaps[other];
         MAP.removeLayer(remove);
         MAP.addLayer(layer);    
