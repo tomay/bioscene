@@ -27,8 +27,6 @@ function initMap() {
 	// set up the map and remove the default zoomControl
 	MAP = L.map('map', {
 	    zoomControl: false,
-        // layers: [streets, forest2000]   
-		layers: [streets]	
 	});
 
     // init wms layers
@@ -61,7 +59,7 @@ function initState() {
     
     // trigger basemaps
     $('#map input[name="basemaps"]').removeAttr('checked','checked').trigger('change');
-    $('#map div[data-overlay="streets"] input[name="basemaps"]').prop('checked','checked').trigger('change');
+    $('#map input[data-basemap="streets"]').prop('checked','checked').trigger('change');
     resizeMap();
 }
 
