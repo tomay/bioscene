@@ -98,10 +98,8 @@ function initLayerpicker() {
         var viz     = $(this).is(':checked');
         if (viz) {
             MAP.addLayer(layer);
-            divs.show();
         } else {
             MAP.removeLayer(layer);
-            divs.hide();
         }
     });
 
